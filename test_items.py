@@ -1,9 +1,11 @@
 from selenium.webdriver.common.by import By
 import time
+import pytest
 
 link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
 
-def test_guest_should_see_login_link(browser):
+def test_should_be_button_add_to_cart(browser):
     browser.get(link)
-    browser.find_element(By.XPATH, "//form[@id = 'add_to_basket_form']//button")
-    time.sleep(5)
+    time.sleep(30)
+    button_add_to_cart = browser.find_element(By.XPATH, '//form[@id = "add_to_basket_form"]//button')
+    assert button_add_to_cart.is_enabled() , 'The button is not available!'
