@@ -11,4 +11,3 @@ def test_should_be_button_add_to_cart(browser):
     assert button_add_to_cart.is_enabled() , 'The button is not available!'
 
 
-# commit-3
