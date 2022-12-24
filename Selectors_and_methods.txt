@@ -1,0 +1,483 @@
+banksoyuz		--	название актуального рабочего проекта
+soyuz_my_tests	--	название моего личного проекта
+
+http://www.zvon.org/comp/r/tut-XPath_1.html#Pages~List_of_XPaths	-- учебник по xpath
+//div[id="menu"]
+[atribut="value"]			--	CSS_SELECTOR поиск по значению атрибута
+//p[text()="Lenin cat"]		-	XPATH по полному совпадению текста
+//span[text()="Войти"]			XPATH пример по полному совпадению текста в теге span
+//div[contains(text(),'Платежи')]	XPATH пример содержит часть текста	
+#posts > .item:nth-child(2) > .title
+div .payment-group-list__item > :nth-child(4)	найдет четветрый дочетний элемент от родителя div 
+.form__control-container > .text-control-paint		потомок класса в родителе класса
+.layout-form-wrapper__body input		в блоке div скасса layout-form-wrapper__body найдет тег input
+'//div[text()=" Услуги ЖКХ "]/parent::*'	найдет всех родителей элемента с точным текстом ' Услуги ЖКХ '
+//div[@class='footer__container']//div[text()="Новости"]   -- найдет блок с текстом Новости в блоке футера
+.form-group.form-group_is-first input						-- в блоке с классом найдет тег инпут
+//div[text()="Срок в днях"]/following-sibling::*			--	выдаст всех братьев в контекстном узле
+//CCC/following-sibling::*									--  к примеру если нужно перейти в соседний братский элем
+//div[@class='layout__product-panel']//span[text()=' Добавить продукт']
+//div[@class='payment-group-list__item']//div[text()='УИН (22)']
+//div[text()="ИНН плательщика (60)"]/parent::*//div[text()="?"]		--	обратиться к радителю блока ИНН плательщика
+																		и найдет там потомка подсказку "?"
+//div[text()="ИНН плательщика (60)"]/parent::*//span
+//div[text()="ИНН плательщика (60)"]/parent::*/following-sibling::*//input	-- найдет input в брате родителя (дяде)
+//div[contains(@class, "transaction-history__status_process")]				-- содержит класс с частью значения атрибута
+																				привязка к части текста 
+//*[contains(text(), 'УИН (22)')]/parent::*/following-sibling::*//input		--	найдет input в брате родителя (дяде)
+
+//*[contains(text(), 'Счет получателя')]/parent::*/following-sibling::*//input	--	найдет input в брате родителя (дяде)
+																				привязка к части текста Счет получателя
+
+//div[contains (text(), "Счет получателя")]/parent::*/parent::*/parent::*/control-messages	--	привязаться к фразе Счет получателя,
+																								подняться до родителей до общего блока
+																								и выбать там тег control-messages
+//ab-form-group//div[contains (text(), "Текущий счёт")]/../div[3]		--	две точки .. означают тоже, что и parent::*						
+
+readonly="">
+
+//in[@readonly='']
+
+//div[contains(text(), "УИН")]/parent::*/parent::*//input
+
+
+//ab-form-group//div[contains (text(), "Текущий счёт")] and div[1]
+
+//div[contains (text(), "ИНН получателя (61)")]/../..//select-product
+
+7730176610
+self.find_element((By.XPATH, "//div[contains(text(),'Платеж в бюджет')]")).click()
+
+ИНН получателя (61)
+
+
+=====================================================================
+
+Методы Selenium
+element.send_keys("Ivan") -- 	вписать текст Ivan в форму элемента с логином
+element_submit.click()	--	кликнуть по кнопке
+element.text		--	атрибут элемента, взять текст внутри элемента
+element.clear()		--	очищает поле ввода элемента
+
+from selenium.webdriver.common.keys import Keys		--	обязательно импорт метода Keys
+element.send_keys(Keys.CONTROL, 'a')				--	выделить содержание элемента
+element.send_keys(Keys.CONTROL, 'c')				--	копировать в буфер обмена содержание элемента
+element.send_keys(Keys.CONTROL, 'v')				--	вставить из буфера обмена содержание элемента
+
+pyperclip											-- библиотека для работы с буфером обмена
+https://webfanat.com/article_id/?id=177
+pyperclip.paste()									--	вставить из буфера обмена
+pyperclip.copy('hello world!')						-- 	копировать в буфер обмена
+attr_value = element.get_attribute("attribute name")	--	доступ к атрибутам элемента
+driver.refresh()									-- 	обновить браузер
+
+
+
+
+==========================================================================
+
+Pytest
+pytest test_user_interface.py		--  найти и выполнить все тесты в файле 
+pytest -m smoke test_login.py		--	баква -m в строке на выполенение означает
+										выполнить маркеровыные тесты с маркером smoke
+										из файла test_login.py
+pytest -s test_fixture1.py			--	Не забудьте указать параметр -s, чтобы увидеть текст,
+										который выводится командой print(). 
+pytest -v test_fixture1.py 			--	Если запустить PyTest с параметром -v
+										(verbose, то есть подробный), то в отчёт добавится
+										дополнительная информация со списком тестов и статусом их прохождения: 
+pytest -v -s -m smoke test_login.py	--	Выполнит тесы с подробным отчетом, с содержанием команы print()
+										маркерованные меткой smoke
+	
+pytest current_accounts.py::TestPaymentsToBudget::test_DBOFL_T202	-- запуск одиночного теста функции test_dbofl_t202
+pytest current_accounts.py::TestPaymentsToBudget					-- запуск класса с тестами
+
+with pytest.raises(NoSuchElementException):
+
+										
+Импорты=============================================================
+import pytest
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import os												-- модуль работы с файлами (работа с операционной системой)
+
+
+
+Код================================================================
+PAGES = {'home_page': "user at the home page",			-- объявляем словарь
+         'login_page': "user at the login page",
+         'video_page': "user at the video page"}
+link = PAGES.get('login_page')							-- получить значение ключа
+PAGES[home_page]										-- обращение к словарю по ключу
+
+Git================================================================
+git status
+git add file_name.xxx						--	добавить файл для отслеживания в git
+git commit -m "Тут сообщение о коммите"		--	сделать отпечаток коммит с комментарием локально 
+git log										-- 	отображает информацию с коммитами
+git push origin main						--	перенести изменение с коммитом на удаленный репозиторий
+									origin  --  оригинальный локальный репозиторий
+git branch									--  показать ветки
+git pull --all								--  скачать все ветки удаленного репозитория
+
+git checkout master							--	переключиться на ветку
+git clone --branch=branch-name http://whatever.git		-- клонировать только нужную ветку
+git checkout -b ivan						--	создать ветку ivan и переключиться на нее
+
+git branch ivan2		-- создать ветку ivan2      
+git checkout ivan2    -- переключиться на ветку ivan2
+
+
+
+
+ссылка как кланировать удаленный репозиторий
+https://git-scm.com/book/ru/v2/%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-Git-%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-Git-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F
+
+
+PyCharm=================================================================
+Для создания прокта использую ссылку по настройке виртуального окружения
+https://3-info.ru/post/11063
+Для запуска тестов использую терминал, в терминале нужно переключиться на 
+Command Prompt, тогда мы окажемся в нашем созданном окружении
+
+При создании проекта пайчарм создает папку с файлами настроке виртуального окружениия
+Связать проект пайчарм с гитом:
+	Если открыть любой файл в проекте, то в окне где гнопка запуска "ран" нет иконок гита,
+	значит проект не привязан к гиту 
+
+	Для привязки прокета к гиту, нужно установить отдельно гит или установить его из пайчарма
+	Если гит уже установлен нужно приязать проект пайчарма к гиту
+	Клик главное меню--> VCS--> Create Git Repository--> выбрать папку с питон проектом
+	Связать удаленный репозиторий с прокетом питон:
+	главное меню--> Git--> Manage Remotes в окошке Git Remotes
+	клик кнопочка плюс "+", заполняем поле name - origin, URL - ссылка репозитория типа https://gitlab.com/radhitor/soyuz.git
+	подтвердить логин и пароль (из своего кбинета gitlab)--OK
+
+Установка изолированной среды============================================================
+python -m venv directory_name					--	для создания виртуального окружения 
+python -m venv env								--  создать окружение в папке env
+C:\Users\user\env\Scripts>activate.bat			-- 	запуск файла активирует окружение
+pip list										-- 	покажет какие пакеты установлены
+pip install selenium							--  установка selenium
+pip install selenium==4.*						--  установить только версию и сопуствующие библиотеки
+pip install pytest==7.1.2						--  установка pytest
+help('modules')
+
+=========================================================================================
+Запуск тестов:
+Открыть терминал, перейти в папку с файлом
+cd C:\Users\user\banksoyuz\autotests\tests\ui\delivery
+pytest -vv -s --alluredir=allure-results --env=stg_s14 -k "TestBudget"	
+allure serve allure-results
+
+pytest -vv -s --alluredir=allure-results --env=stg_s14 -k "TestPaymentsCellphone"		
+	--	выполнить тест через Allure указав класс TestPaymentsPmi		
+allure serve allure-results						--	Посмотреть отчет Allure
+
+pytest -vv -s --alluredir=allure-results --env=stg_s14 -k "TestBudget"	Команда для запуска тестов из класса TestBudget 	
+
+pytest -vv -s --alluredir=allure-results --env=stg_s14 -k "BlocksPayments"
+pytest -vv -s --alluredir=allure-results --env=stg_s14 -k "BlocksBudgetOtherPayments"
+pytest -vv -s --alluredir=allure-results --env=stg_s14 -k "BlocksBudgetTaxesAndFees"
+
+pytest -vv -s --alluredir=allure-results --env=stg_s14 -k "TestBudgetTaxesAndFees"
+
+TestBudgetTaxesAndFees
+=====================================================================================================
+Запуск тестов файлом:
+
+в терминале перейти в папку и запустить тесты:
+cd C:\Users\user\banksoyuz\autotests\tests\ui\delivery
+pytest -vv -s --alluredir=allure-results --env=stg_s14 -k test_budget.py
+pytest -vv -s --alluredir=allure-results --env=stg_s14 -k test_budget_other_payment.py
+pytest -vv -s --alluredir=allure-results --env=stg_s14 -k test_budget_taxes_and_fees.py
+
+Показать отчет, перейти в папку и открыть отчет:
+cd C:\Users\user\banksoyuz\autotests\tests
+allure serve allure-results
+
+pytest -vv -s --alluredir=allure-results --env=stg_s14 -k "TestBudgetTaxesAndFees"
+
+========================================================================================================
+
+
+
+
+
+
+//div[@class = "alert__body"]
+
+
+
+pip freeze > requirements.txt		-- Фиксируем пакеты в requirements.txt 
+pip install -r requirements.txt		-- распакаовка покетов
+									https://stepik.org/lesson/193188/step/4
+									
+pip install allure-pytest
+
+Установка и клонирование проекта в PyCharm
+======================================================================================
+file--new Project - указать пустую папку для нового проекта
+Создать проект без виртуального окружения,
+ добавим пепозиторий
+VCS --> Get from Version Control --> URL (клонированная ссылка) -->  свободная директория
+Git активирован, появились иконки гита
+автоматичаски появится запрос на создание окружения если есть файл requirements.txt
+соглашаемся, создается окружение с интерпретатором из файла requirements.txt
+Иконка ветки правый нижний угол сменить ветку Checkout(сейчас этого не видно)
+для установки всех пакетов среды Инсталлировать файл requirements.txt 
+pip install -r requirements.txt
+git checkout -b ivan
+
+	
+=====================================================================================	
+	
+pytest 7.1.2
+pytest-forked 1.4.0
+pytest-xdist 2.5.0
+allure-pytest 2.9.45
+allure-python-commons 2.9.45
+
+pip uninstall selenium 4.2.0              
+pip uninstall allure-python-commons 2.9.45
+pip uninstall  selenium==4.2.0
+
+PS C:\Users\user\Desktop\Stepik\my_tests
+
+есть библиотеки которые могут связаны с командной строкой,
+ их версию можно там посмотреть к примеру pip --versoin 
+ 
+другой вид библиотек, которые нет возможности посмотреть из 
+командной строки, для них команда типа selenium --version выдает ошибку
+
+Это не точно, не удалось проверить!
+#надо запускать в виде python -m script1 тогда срабатывает система поиска модулей пайтона по путям из sys.path
+
+========================================================================
+ПОДГОТОВИТЕЛЬНЫЙ РАБОТЫ ПО РАБОТЕ С ТЕСТАМИ
+1) Зайти под логином
+2) Проверить продукты пользователя
+3) Убедиться, селекторы шага найдут соответствующие продукты
+4) Прогнать тест с авторизацией и оплатой, визуально убедиться, что нет окна ошибки
+========================================================================
+АНАЛИЗИРУЙ ШИБКИ И НЕ БУДЕТ ПРОБЛЕМ!
+1) При запуске теста через cmd или термина PyCharm командой pytest file_name.py
+возникла ошибка:
+
+element_login = css_selector(browser, 60, selectors.LOGIN_PAGE_LOGIN)
+AttributeError: module 'selectors' has no attribute 'LOGIN_PAGE_LOGIN'
+
+При этом такой ошибки не возникало если я запускаю run из PyCharm, тест проходил.
+Видимо обработка и исполнение кода из cmd отличается от обработки из PyCharm
+Как я догадываюсь, что интерпритатор из PyCharm и локальный видит разные библиотеки
+проблему удалось решить путем переименования моего модуля из selectors в selectors_ivan
+ВЫВОД: при создании модуля создавайте уникальное название, и проверяйте нет ли уже подобного,
+а также петед кго использованием проведите простой тест в виртуельной среде и в терминале. 
+
+2) При открытии проекта в PyCharm проверить настройки интерпретатора
+	проверит какие библиотеки подгружены interpreter Settings...
+
+===========================================================
+	Настройки браузера Chrome в selenium
+	В моем прокете это настраиваетсяв в файле
+	описания фикстуры инициализации браузера conftest.py
+	
+https://stackoverflow.com/questions/23381324/how-can-i-control-chromedriver-open-window-size
+browser = webdriver.Chrome()
+browser.set_window_size(1400,1000)
+browser.get('https://habr.com/ru/company/otus/blog/596071/')
+
+============================================================
+Action Chains — Цепочки действий
+наведение курсора, движения мыши, контектсное меню мыши и прочее
+https://www.geeksforgeeks.org/action-chains-in-selenium-python/
+
+actions = ActionChains(browser)
+actions.move_to_element(element)		--	навести на элемент
+actions.perform()						--	выполнить действие
+
+actions.move_to_element_with_offset(element, 100, 200)		--	отвести от элемента на x=100 y=200 пикселей в сторону от верхнего левого угла
+actions.click()												-- Координаты отсчитываются вправо и вниз
+actions.perform()											(если нужно в другие стороныЮ то нужно поставить знак минус перез значениями координат)				
+
+actions.move_to_element_with_offset(element, -100, -200).click()	-- влево и вверх
+actions.perform()
+
+actions.move_to_element(element).perform()
+
+Если действия не работают через стандартные инструменты selenium,
+ то можно использовать ActionChains, из работа немного отличается и чаще всего работает
+ 
+actions.double_click(element)
+actions.key_down(Keys.CONTROL).send_keys('c').key_up(Keys.CONTROL).perform() 	--	занести элемент в буфер обмена
+actions.perform()
+
+
+actions.pause(3)
+actions.pause(3)
+
+		
+список всех клавишь клавиатуры
+https://www.geeksforgeeks.org/special-keys-in-selenium-python/
+
+
+
+=========================================================================
+https://utkin7890.github.io/page_new_win/three.html
+https://utkin7890.github.io/test_shadow/shadow_open.html
+https://utkin7890.github.io/test_shadow/shadow_closed.html
+=========================================================================
+Доступ к теневому DOM дереву через питоновский метод shadow_root
+
+shadow_host = driver.find_element(By.CSS_SELECTOR, '#shadow_host')
+shadow_root = shadow_host.shadow_root
+shadow_content = shadow_root.find_element(By.CSS_SELECTOR, '#shadow_content')
+
+Доступ к теневому DOM дереву через ява скрипт
+
+shadow_host = driver.find_element_by_css_selector('#shadow_host')
+shadow_root = driver.execute_script('return arguments[0].shadowRoot', shadow_host)
+shadow_content = shadow_root.find_element_by_css_selector('#shadow_content')
+
+three file Test shadow DOM closed
+https://utkin7890.github.io/page_new_win/three.html	
+
+two file Test shadow DOM open
+https://utkin7890.github.io/page_new_win/two.html
+
+=============================================================================
+https://developer.mozilla.org/ru/docs/Web/API/Element/scrollIntoView
+Методы execute_script (js) скролл экрана:
+
+driver.execute_script("return arguments[0].scrollIntoView(true);", element)		--	скролл элемента к верхней границе экрана
+driver.execute_script("return arguments[0].scrollIntoView(true);", element)		--	скролл элемента к нижней границе экрана
+driver.execute_script('return arguments[0].scrollIntoView({block: "center", behavior: "smooth"});', element)	-- скролл элемента к центру экрана
+driver.execute_script('return arguments[0].scrollBy(0, 1000);', element)		--	скролл внутреннего блока элемента на 1000 пиксилей вниз
+
+Если стоит задача просаролить к экран к списку элементов, то возникнет ошибка ява скрипт
+Так как скрол возможно сделать только для одного элемена
+В таком случае нужно делать скрол до блока объединяющий элементы
+а затем делать скролл до каждого элемента в отдельности
+
+============================================================================
+
+actions.move_to_element_with_offset(element1, 100, 200)
+
+=============================================================================
+Заготовка для TimeoutException, если элемена не должно быть в связи с исключением TimeoutException
+предварительно нужно импортировать TimeoutException.
+
+from selenium.common.exceptions import TimeoutException
+
+def control_messages_absent_inn_recipient_61(self):
+	try:
+		element = WebWeit(self.driver, 3).until(exp_cond.element_to_be_clickable(LocatorsBudget.CONTROL_MESSAGES_INN_RECIPIENT_61))
+		assert len(element.text) == 0, 'Сообщений об ошибке должно быть при корректном значении в поле ИНН получателя (61)'
+	except TimeoutException:
+		return False
+	return True
+============================================================================
+У строк есть метод isdigit, который позволяет проверить, являются ли символы, 
+из которых состоит строка цифрами
+
+Проверить содержимое на число
+взять контент
+взять срез кроме первого элемента
+some_text = '1234'
+some_text.isdigit()
+print(some_text.isdigit())
+>>>True
+ответ придет в логическом значении будет именть тип данных Boolean 
+для проверки логической истинности используем утверждение is True
+assert some_text.isdigit() is True
+
+Заменить элемент в строке
+my_str = aaa_123
+my_str = my_str.replace('aaa', 'xxx')  # 'xxx_123'
+
+==============================================================================
+# к примеру мы получили текст, который является формулой
+# для использовании этой формулы нужно перевести эту строку текста в выражение
+# для этого используем функцию eval() - которая выполняет перевод строки в выражение
+result_formula = eval(formula)
+
+# Выражения в языке Python.
+# Выражением принято считать секция кода, вычисляющуюся в значение.
+# Таким образом выражение может включать в себя разнообразные комбинации переменных, значений, операторов.
+===============================================================================
+Доступ до разных данных язика в браузере и в разметке
+https://software-testing.ru/forum/index.php?/topic/40936-perekliuchenie-iazykov-v-chrome-headless-selenium-python/
+=====================================================================
+Составление сложных условий
+1- составить приблизительный алгоритм программы
+2- проверить каждый элкмент условия отдельно
+3- пройти одну итерацию программы, отследить работу на каждом шаге итерации
+4- проверить цикл программы
+5- скомпоновать все в программу 
+=====================================================================
+Классификация функций в тестировании soyuz
+1- Определить позицию элемента, сделать к ней скрол, таймслип(1)
+переменные:
+Локатор
+Скрол - "start", "center", "end"
+
+2- Определить позицию элемента, сделать к ней скрол, таймслип(1)
+переменные:
+a)Локатор
+b)Скрол - "start", "center", "end"
+c)ввести данные (добавить клик за элементом)
+
+3- Проверить данные
+переменные:
+a)Локатор
+b)Скрол - "start", "center", "end"
+c)ввести значение переменной для проверки
+(очистить буфер обмена, выделить все, вставить в буфера обмена, сравнить буфер обмена с данными в переменной)
+
+4- Ввести данные, проверить текст ошибки
+
+5- Проверить подсказку ошибки
+
+===============================================================================
+Получение даты и время, формат даты
+https://pynative.com/python-datetime-format-strftime/
+
+from datetime import datetime	-------------------- импортировать встроенный модуль
+data_time = datetime.now()		-------------------- применить метод now(), получим объект даты и времени 
+date_time_str = now.strftime("%d-%m-%Y")	-------- конвертировать объект даты в строку даты у нужном формате 
+
+now.strftime("%Y-%m-%d %H:%M:%S")			-------- другие варианты конвертации с использванием даты и времени
+================================================================================
+Узнать размеры элемента
+element.size
+{'height': 62.0, 'width': 208.0}
+element.size['height']
+62.0
+Если элемент доступен и отображен is_enabled() и is_displayed() но реально не виден
+То можено проверить его наличие по размерам элемента!
+
+element_list_products_height = element_list_products.size['height']
+assert element_list_products_height == 0, 'Список продуктов...' !!!!!!!!!!!!!	--	проверка работает только через 
+																					заданную переменную
+ПРОВЕРКУ assert ЗАДАВАТЬ ЧЕРЕЗ ПРИСВОЕНУЮ ПЕРЕМЕННУЮ, ЕСЛИ ЗАДАТЬ ПРОВЕРКУ НАПРЯМУЮ, ТО РОБОТАТЬ НЕ БУДЕТ! 																					
+================================================================================
+При написании теста следует в точности следовать действиям пользователя
+К пимеру:
+	При введении данных в поле должен выпадать список, при клике за пределы выпадающего списка он свовачивается
+	Проблема - список не сровачивался
+	Решение - перед введением данных в поле нужно сделать по нему клик, подобно тому, как это делате пользователь.
+================================================================================
+Область видимости переменных
+https://metanit.com/python/tutorial/2.9.php
+Когда нужно передать значение переменной из одной функции в другую, нужно задать переменную глобальной,
+чтобы ее было видно в любой вункции данного документа
+def say_hi():
+    global  product_name		--	Задавать переменной глобалоной нужно перед работы с ней (т.е. в первых упоминаниях о переменной)			
+
+теперь переменную product_name видно в любой функции в данном документе
+================================================================================
+
+
+
