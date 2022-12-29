@@ -11,6 +11,7 @@ def test_guest_can_go_to_login_page(browser):
     page.go_to_login_page()
     page.should_be_login_link()
 
+#  команда для запуска теста через терминал: pytest -v --tb=line --language=en test_main_page.py
 
 
 
